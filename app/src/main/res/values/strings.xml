@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">TicketsSearch</string>
+    <string name="text_avia_tickets">Авиабилеты</string>
+    <string name="text_hotels">Отели</string>
+    <string name="text_briefly_speaking">Короче</string>
+    <string name="text_follow">Подписки</string>
+    <string name="text_profile">Профиль</string>
+
+    <string name="difficult_route">Сложный маршрут</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="weekend">Выходные</string>
+    <string name="hot_tickets">Горячие билеты</string>
+
+    <string name="start_text">Поиск дешевыx\nавиабилетов</string>
+    <string name="music_block_text">Музыкально отлететь</string>
+
+    <string name="text_last_town">Минск</string>
+    <string name="text_help">Куда - Турция</string>
+
+    <string name="popular_Istanbul">Стамбул</string>
+    <string name="popular_Sochi">Сочи</string>
+    <string name="popular_Phuket">Пхукет</string>
+    <string name="popular">Популярное направление</string>
+
+    <string name="has_transfer_false">Без пересадок</string>
+    <string name="has_transfer_true">С пересадками</string>
+
+    <string name="direct_flights">Прямые рейсы</string>
+
+    <string name="button_see_more">Посмотреть все билеты</string>
+    <string name="button_switch">Подписка на цену</string>
+
+    <string name="filter1">обратно</string>
+    <string name="filter2">24 фев, сб</string>
+    <string name="filter3">1 эконом</string>
+    <string name="filter4">фильтр</string>
+</resources>

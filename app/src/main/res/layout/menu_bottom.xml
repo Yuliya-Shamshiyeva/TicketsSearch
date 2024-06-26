@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/button_avia_tickets"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_avia_tickets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vector"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_avia_tickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_avia_tickets"
+                android:gravity="center"
+                android:textColor="@color/white2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_hotels"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_hotels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vector_1"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_hotels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_hotels"
+                android:gravity="center"
+                android:textColor="@color/white2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_briefly_speaking"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_briefly_speaking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vector_2"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_briefly_speaking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_briefly_speaking"
+                android:gravity="center"
+                android:textColor="@color/white2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_follow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vector_3"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/text_follow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_follow"
+                android:gravity="center"
+                android:textColor="@color/white2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vector_4"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_profile"
+                android:gravity="center"
+                android:textColor="@color/white2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

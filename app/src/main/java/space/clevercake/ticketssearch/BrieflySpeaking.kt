@@ -1,0 +1,55 @@
+package space.clevercake.ticketssearch
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import space.clevercake.ticketssearch.retrofit.OfferApi
+
+class BrieflySpeaking : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_brieflyspeaking)
+
+        val viewContainerMenuBottom: View = layoutInflater.inflate(
+            R.layout.menu_bottom,
+            null
+        )
+        val linerContainerMenuBottom: FrameLayout = findViewById(R.id.container_menu_bottom)
+        linerContainerMenuBottom.addView(viewContainerMenuBottom)
+
+        val buttonMainActivity = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_avia_tickets)
+        val buttonHotels = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_hotels)
+        val buttonFollow = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_follow)
+        val buttonProfile = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
+
+        val ivonBrieflySpeaking = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_briefly_speaking)
+        ivonBrieflySpeaking.setImageResource(R.drawable.vector_2_blue)
+
+        buttonMainActivity.setOnClickListener{
+            startActivity(Intent(this@BrieflySpeaking, MainActivity::class.java))
+            finish()
+        }
+        buttonHotels.setOnClickListener{
+            startActivity(Intent(this@BrieflySpeaking, Hotels::class.java))
+            finish()
+        }
+        buttonFollow.setOnClickListener{
+            startActivity(Intent(this@BrieflySpeaking, Follow::class.java))
+            finish()
+        }
+        buttonProfile.setOnClickListener{
+            startActivity(Intent(this@BrieflySpeaking, Profile::class.java))
+            finish()
+        }
+    }
+}

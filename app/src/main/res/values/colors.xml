@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white2">#FF9F9F9F</color>
+
+    <color name="green">#FF3A633B</color>
+    <color name="blue">#FF2261BC</color>
+    <color name="dark_blue">#FF00427D</color>
+    <color name="red">#FFFF5E5E</color>
+
+    <color name="grey1">#FF2F3035</color>
+    <color name="grey2">#FF3E3F43</color>
+    <color name="grey3">#FF2F3035</color>
+    <color name="grey4">#FF1D1E20</color>
+    <color name="grey5">#FF242529</color>
+
+    <color name="black_fone">#FF0C0C0C</color>
+    <color name="white_text">#FFD9D9D9</color>
+
+    <color name="line">#FF5E5F61</color>
+
+</resources>
