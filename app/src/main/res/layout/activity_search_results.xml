@@ -22,14 +22,12 @@
             android:layout_height="0dp"
             android:layout_weight="15"
             android:layout_marginTop="10dp">
-
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
-            android:layout_marginTop="5dp">
+            android:layout_weight="5">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -54,7 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/union_1"
+                            app:srcCompat="@drawable/icon_plus"
                             android:layout_gravity="center"
                             android:layout_marginLeft="8dp"/>
 
@@ -97,7 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/p"
+                            app:srcCompat="@drawable/icon_person"
                             android:layout_gravity="center"
                             android:layout_marginLeft="8dp"/>
                         <TextView
@@ -121,7 +119,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/union"
+                            app:srcCompat="@drawable/icon_filter"
                             android:layout_gravity="center"
                             android:layout_marginLeft="8dp"/>
                         <TextView
@@ -193,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/vector_3_blue"
+                app:srcCompat="@drawable/icon_bell_blue"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"/>
             <Switch

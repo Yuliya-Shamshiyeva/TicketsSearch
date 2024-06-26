@@ -6,14 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
 
 class BrieflySpeaking : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +26,7 @@ class BrieflySpeaking : AppCompatActivity() {
         val buttonProfile = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
         val ivonBrieflySpeaking = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_briefly_speaking)
-        ivonBrieflySpeaking.setImageResource(R.drawable.vector_2_blue)
+        ivonBrieflySpeaking.setImageResource(R.drawable.icon_point_blue)
 
         buttonMainActivity.setOnClickListener{
             startActivity(Intent(this@BrieflySpeaking, MainActivity::class.java))

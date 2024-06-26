@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/rectangle_286"
+                app:srcCompat="@drawable/rectangle"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="25dp"/>
 
@@ -56,7 +56,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
-                                app:srcCompat="@drawable/icon__1_" />
+                                app:srcCompat="@drawable/icon_airplane1" />
 
                             <EditText
                                 android:id="@+id/from"
@@ -90,7 +90,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
-                                app:srcCompat="@drawable/icon__2_" />
+                                app:srcCompat="@drawable/icon_search" />
 
                             <EditText
                                 android:id="@+id/where"
@@ -109,7 +109,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
-                                app:srcCompat="@drawable/icon__3_" />
+                                app:srcCompat="@drawable/icon_cross" />
 
                         </LinearLayout>
 

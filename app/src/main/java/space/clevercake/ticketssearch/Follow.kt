@@ -6,14 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
 
 class Follow : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +26,7 @@ class Follow : AppCompatActivity() {
         val buttonProfile =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
         val iconFollow = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_follow)
-        iconFollow.setImageResource(R.drawable.vector_3_blue)
+        iconFollow.setImageResource(R.drawable.icon_bell_blue)
 
         buttonMainActivity.setOnClickListener{
             startActivity(Intent(this@Follow, MainActivity::class.java))

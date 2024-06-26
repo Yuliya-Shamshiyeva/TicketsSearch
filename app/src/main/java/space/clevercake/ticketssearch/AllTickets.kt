@@ -3,22 +3,16 @@ package space.clevercake.ticketssearch
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
-import space.clevercake.ticketssearch.retrofit.Ticket
 import space.clevercake.ticketssearch.retrofit.TicketApi
 
 class AllTickets : AppCompatActivity() {
@@ -40,7 +34,7 @@ class AllTickets : AppCompatActivity() {
         val buttonProfile =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
         val iconMainActivity = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_avia_tickets)
-        iconMainActivity.setImageResource(R.drawable.vector_blue)
+        iconMainActivity.setImageResource(R.drawable.icon_airplane2_blue)
 
         buttonHotels.setOnClickListener{
             startActivity(Intent(this@AllTickets, Hotels::class.java))

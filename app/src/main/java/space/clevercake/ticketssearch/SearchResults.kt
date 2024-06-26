@@ -7,11 +7,8 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
 import space.clevercake.ticketssearch.retrofit.TicketOfferApi
 
 class SearchResults : AppCompatActivity() {
@@ -29,7 +25,7 @@ class SearchResults : AppCompatActivity() {
         setContentView(R.layout.activity_search_results)
 
         val viewContainerSearch: View = layoutInflater.inflate(
-            R.layout.search_box,
+            R.layout.search_box_active,
             null
         )
         val linerContainerSearch: FrameLayout = findViewById(R.id.view_container_search)
@@ -81,7 +77,7 @@ class SearchResults : AppCompatActivity() {
         val buttonProfile =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
         val iconMainActivity = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_avia_tickets)
-        iconMainActivity.setImageResource(R.drawable.vector_blue)
+        iconMainActivity.setImageResource(R.drawable.icon_airplane2_blue)
 
         buttonHotels.setOnClickListener{
             startActivity(Intent(this@SearchResults, Hotels::class.java))
@@ -113,7 +109,7 @@ class SearchResults : AppCompatActivity() {
 
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
+            .baseUrl(" https://run.mocky.io/v3/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val ticketOfferApi = retrofit.create(TicketOfferApi::class.java)
         CoroutineScope(Dispatchers.IO).launch {
@@ -123,39 +119,31 @@ class SearchResults : AppCompatActivity() {
                 val linerAviaRecommendations: LinearLayout = findViewById(R.id.avia)
 
                 linerAviaRecommendations.removeAllViews()
-
-                val ticketsOffers = ticketOffer.ticketsOffers
-                if (ticketsOffers != null) {
+                val circleIconList = listOf(R.drawable.circle_icon_red, R.drawable.circle_icon_blue, R.drawable.circle_icon_white) // Список значений
+                var index = 0
                     for (ticketsOffers in ticketOffer.ticketsOffers) {
                         val viewAviaRecommendations: View = layoutInflater.inflate(
                             R.layout.ticket_recommendations,
                             null
                         )
-                        val aviaCompany =
-                            viewAviaRecommendations.findViewById<TextView>(R.id.avia_company)
-                        val circleIcon =
-                            viewAviaRecommendations.findViewById<ImageView>(R.id.circle_icon)
-                        val time =
-                            viewAviaRecommendations.findViewById<TextView>(R.id.departure_time_text)
+
+                        val aviaCompany = viewAviaRecommendations.findViewById<TextView>(R.id.avia_company)
+                        val circleIcon = viewAviaRecommendations.findViewById<ImageView>(R.id.circle_icon)
+                        val time = viewAviaRecommendations.findViewById<TextView>(R.id.departure_time_text)
                         val price = viewAviaRecommendations.findViewById<TextView>(R.id.price)
 
-//                    if(ticketOffer = [0]){
-//                        image.setImageResource(R.drawable.img_1)
-//                    }else if (ticketsOffers.id == 2){
-//                        image.setImageResource(R.drawable.img_2)
-//                    }else{
-//                        image.setImageResource(R.drawable.img_3)
-//                    }
+                        circleIcon.setImageResource(circleIconList[index % circleIconList.size])
+                        index++
 
                         aviaCompany.text = ticketsOffers.title
                         for (timeRange in ticketOffer.ticketsOffers) {
-                            time.text = ticketsOffers.timeRange.toString()
+                            time.text = ticketsOffers.timeRange.toString().filter { it != '[' && it != ']' }
                         }
                         price.text = "${ticketsOffers.price.value} ₽"
 //
                         linerAviaRecommendations.addView(viewAviaRecommendations)
                     }
-                }
+
             }
         }
     }

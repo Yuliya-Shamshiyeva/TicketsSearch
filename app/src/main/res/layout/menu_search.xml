@@ -32,7 +32,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/type__________state_defaultroute" />
+                    app:srcCompat="@drawable/icon_difficult" />
             </FrameLayout>
 
             <TextView
@@ -68,7 +68,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/type______state_defaultball" />
+                    app:srcCompat="@drawable/icon_planet" />
             </FrameLayout>
 
             <TextView
@@ -104,7 +104,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/type____________state_defaultcalendar" />
+                    app:srcCompat="@drawable/icon_date" />
             </FrameLayout>
 
             <TextView
@@ -141,7 +141,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/type________state_defaultfire" />
+                    app:srcCompat="@drawable/icon_hot" />
             </FrameLayout>
 
             <TextView

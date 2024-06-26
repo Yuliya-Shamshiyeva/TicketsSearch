@@ -38,7 +38,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity=""
                         android:layout_margin="10dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/istanbul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                             android:textColor="@color/white"/>
 
                         <TextView
-                            android:id="@+id/textView7"
+                            android:id="@+id/textView117"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -98,7 +98,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity=""
                         android:layout_margin="10dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/sochi" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity=""
                         android:layout_margin="10dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/phuket" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

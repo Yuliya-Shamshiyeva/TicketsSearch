@@ -7,11 +7,8 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -81,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val buttonProfile =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
         val iconMainActivity = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_avia_tickets)
-        iconMainActivity.setImageResource(R.drawable.vector_blue)
+        iconMainActivity.setImageResource(R.drawable.icon_airplane2_blue)
 
         buttonHotels.setOnClickListener{
             startActivity(Intent(this@MainActivity, Hotels::class.java))

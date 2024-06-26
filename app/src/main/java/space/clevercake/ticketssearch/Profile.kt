@@ -6,14 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
 
 class Profile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +26,7 @@ class Profile : AppCompatActivity() {
         val buttonHotels = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_hotels)
 
         val iconProfile = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_profile)
-        iconProfile.setImageResource(R.drawable.vector_4_blue)
+        iconProfile.setImageResource(R.drawable.icon_person1_blue)
 
         buttonMainActivity.setOnClickListener{
             startActivity(Intent(this@Profile, MainActivity::class.java))
