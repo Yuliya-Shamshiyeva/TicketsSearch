@@ -45,4 +45,9 @@ class Hotels : AppCompatActivity() {
             finish()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@Hotels, MainActivity::class.java))
+        finish()
+    }
 }

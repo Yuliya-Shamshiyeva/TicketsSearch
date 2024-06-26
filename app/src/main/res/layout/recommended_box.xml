@@ -21,6 +21,7 @@
             android:layout_marginTop="15dp">
 
             <LinearLayout
+                android:id="@+id/istanbul"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -32,13 +33,13 @@
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
+
                     <ImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/imageView13"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity=""
-                        android:layout_margin="10dp"
-                        tools:srcCompat="@drawable/istanbul" />
+                        app:srcCompat="@drawable/istanbul"
+                        android:layout_margin="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,18 +88,18 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/sochi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageView23"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity=""
-                        android:layout_margin="10dp"
-                        tools:srcCompat="@drawable/sochi" />
+                        app:srcCompat="@drawable/sochi"
+                        android:layout_margin="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -149,19 +150,18 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/phuket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imageView33"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity=""
-                        android:layout_margin="10dp"
-                        tools:srcCompat="@drawable/phuket" />
-
+                        app:srcCompat="@drawable/phuket"
+                        android:layout_margin="10dp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

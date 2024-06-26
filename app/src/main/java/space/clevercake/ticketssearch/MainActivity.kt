@@ -8,18 +8,16 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.OfferApi
+import space.clevercake.ticketssearch.retrofit.Offer
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var offerViewModel: DataViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,12 +38,52 @@ class MainActivity : AppCompatActivity() {
             val fromEditText = view.findViewById<EditText>(R.id.from)
             val whereEditText = view.findViewById<EditText>(R.id.where)
 
+            fromEditText.filters = arrayOf(CyrillicInputFilter())
+            whereEditText.filters = arrayOf(CyrillicInputFilter())
+
+            fromEditText.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    checkFieldsAndStartSearch(fromEditText.text.trim().toString(), whereEditText.text.trim().toString(), dialog)
+                }
+            }
+
+            whereEditText.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    checkFieldsAndStartSearch(fromEditText.text.trim().toString(), whereEditText.text.trim().toString(), dialog)
+                }
+            }
+
+
+
             val viewMenuSearch: View = layoutInflater.inflate(
                 R.layout.menu_search,
                 null
             )
             val menuSearch = view.findViewById<FrameLayout>(R.id.menu_search)
             menuSearch.addView(viewMenuSearch)
+            val buttonDifficultRoute = viewMenuSearch.findViewById<LinearLayout>(R.id.button_difficult_route)
+            val buttonAnywhere = viewMenuSearch.findViewById<LinearLayout>(R.id.button_anywhere)
+            val buttonWeekend = viewMenuSearch.findViewById<LinearLayout>(R.id.button_weekend)
+            val buttonHotTickets = viewMenuSearch.findViewById<LinearLayout>(R.id.button_hot_tickets)
+            buttonDifficultRoute.setOnClickListener{
+                startActivity(Intent(this@MainActivity, DifficultRoute::class.java))
+                finish()
+                dialog.dismiss()
+            }
+            buttonAnywhere.setOnClickListener{
+
+            }
+            buttonWeekend.setOnClickListener{
+                startActivity(Intent(this@MainActivity, Weekend::class.java))
+                finish()
+                dialog.dismiss()
+            }
+            buttonHotTickets.setOnClickListener{
+                startActivity(Intent(this@MainActivity, HotTickets::class.java))
+                finish()
+                dialog.dismiss()
+            }
+
 
             val viewRecommendedBox: View = layoutInflater.inflate(
                 R.layout.recommended_box,
@@ -53,6 +91,41 @@ class MainActivity : AppCompatActivity() {
             )
             val recommendedBox = view.findViewById<FrameLayout>(R.id.recommended_box)
             recommendedBox.addView(viewRecommendedBox)
+
+            val buttonIstanbul = recommendedBox.findViewById<LinearLayout>(R.id.istanbul)
+            val buttonSochi = recommendedBox.findViewById<LinearLayout>(R.id.sochi)
+            val buttonPhuket = recommendedBox.findViewById<LinearLayout>(R.id.phuket)
+            buttonIstanbul.setOnClickListener{
+
+                val intent1 = Intent(this@MainActivity, SearchResults::class.java)
+                intent1.putExtra("FROM", fromEditText.text.trim().toString())
+                intent1.putExtra("WHERE", "Турция")
+
+                startActivity(intent1)
+                finish()
+                dialog.dismiss()
+            }
+            buttonSochi.setOnClickListener{
+                val intent1 = Intent(this@MainActivity, SearchResults::class.java)
+                intent1.putExtra("FROM", fromEditText.text.trim().toString())
+                intent1.putExtra("WHERE", "Сочи")
+
+                startActivity(intent1)
+                finish()
+                dialog.dismiss()
+            }
+            buttonPhuket.setOnClickListener{
+                val intent1 = Intent(this@MainActivity, SearchResults::class.java)
+                intent1.putExtra("FROM", fromEditText.text.trim().toString())
+                intent1.putExtra("WHERE", "Пхукет")
+
+                startActivity(intent1)
+                finish()
+                dialog.dismiss()
+            }
+
+
+
 
             dialog.setCancelable(true)
             dialog.setContentView(view)
@@ -99,59 +172,73 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        offerViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+
+        offerViewModel.offerLiveData.observe(this, Observer { offer ->
+            offer?.let { updateUI(it) }
+        })
+
+        offerViewModel.errorLiveData.observe(this, Observer { error ->
+            showError(error)
+        })
+        offerViewModel.fetchOffers()
+    }
 
 
+    private fun updateUI(offer: Offer) {
+        val linerContainerMusicFly: LinearLayout = findViewById(R.id.view_container_music_fly)
+        linerContainerMusicFly.removeAllViews()
+        for (offers in offer.offers) {
+            val viewContainerMusicFly: View = layoutInflater.inflate(
+                R.layout.music_box,
+                null
+            )
+            val image = viewContainerMusicFly.findViewById<ImageView>(R.id.image)
+            val title = viewContainerMusicFly.findViewById<TextView>(R.id.title)
+            val town = viewContainerMusicFly.findViewById<TextView>(R.id.town)
+            val price = viewContainerMusicFly.findViewById<TextView>(R.id.price)
 
-
-
-
-
-
-
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val offerApi = retrofit.create(OfferApi::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            val offer = offerApi.getOffer()
-            runOnUiThread{
-                val linerContainerMusicFly: LinearLayout = findViewById(R.id.view_container_music_fly)
-                linerContainerMusicFly.removeAllViews()
-                for (offers in offer.offers) {
-                    val viewContainerMusicFly: View = layoutInflater.inflate(
-                        R.layout.music_box,
-                        null
-                    )
-                    val image = viewContainerMusicFly.findViewById<ImageView>(R.id.image)
-                    val title = viewContainerMusicFly.findViewById<TextView>(R.id.title)
-                    val town = viewContainerMusicFly.findViewById<TextView>(R.id.town)
-                    val price = viewContainerMusicFly.findViewById<TextView>(R.id.price)
-
-                    if(offers.id == 1){
-                        image.setImageResource(R.drawable.img_1)
-                    }else if (offers.id == 2){
-                        image.setImageResource(R.drawable.img_2)
-                    }else{
-                        image.setImageResource(R.drawable.img_3)
-                    }
-
-                    title.text = offers.title
-                    town.text = offers.town
-                    price.text = "от ${offers.price.value} ₽"
-
-                    linerContainerMusicFly.addView(viewContainerMusicFly)
-                }
+            if(offers.id == 1){
+                image.setImageResource(R.drawable.img_1)
+            }else if (offers.id == 2){
+                image.setImageResource(R.drawable.img_2)
+            }else{
+                image.setImageResource(R.drawable.img_3)
             }
+
+            title.text = offers.title
+            town.text = offers.town
+            price.text = "от ${offers.price.value} ₽"
+
+            linerContainerMusicFly.addView(viewContainerMusicFly)
         }
     }
-//    private fun showModalWindow(view: View){
-//        val dialog = BottomSheetDialog(this)
-//        val view = layoutInflater.inflate(R.layout.modal_window,null)
-//        val fromEditText = view.findViewById<EditText>(R.id.from)
-//        val whereEditText = view.findViewById<EditText>(R.id.where)
-//        dialog.setCancelable(false)
-//        dialog.setContentView(view)
-//        dialog.show()
-//    }
+
+    private fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun checkFieldsAndStartSearch(fromText: String, whereText: String, dialog: BottomSheetDialog) {
+        if (fromText.isNotBlank() && whereText.isNotBlank()) {
+            val intent1 = Intent(this@MainActivity, SearchResults::class.java)
+            intent1.putExtra("FROM", fromText)
+            intent1.putExtra("WHERE", whereText)
+            startActivity(intent1)
+            finish()
+            dialog.dismiss()
+        } else {
+            Toast.makeText(this@MainActivity, "Введите место отправления и место назначения", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private var back_pressed: Long = 0
+    override fun onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+            finishAffinity()
+        } else Toast.makeText(
+            baseContext, R.string.backsms,
+            Toast.LENGTH_SHORT
+        ).show()
+        back_pressed = System.currentTimeMillis()
+    }
 }

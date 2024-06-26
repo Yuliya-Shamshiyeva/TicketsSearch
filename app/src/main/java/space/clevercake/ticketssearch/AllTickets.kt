@@ -7,19 +7,28 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import space.clevercake.ticketssearch.retrofit.TicketApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import space.clevercake.ticketssearch.retrofit.Ticket
 
 class AllTickets : AppCompatActivity() {
-
+    private lateinit var ticketViewModel: DataViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_tickets)
+
+        val buttonBack =findViewById<ImageView>(R.id.arrow)
+        buttonBack.setOnClickListener{
+            startActivity(Intent(this@AllTickets, SearchResults::class.java))
+            finish()
+        }
+        val textFrom = findViewById<TextView>(R.id.from)
+        val textWhere = findViewById<TextView>(R.id.where)
+        textFrom.text = intent.getStringExtra("FROM")
+        textWhere.text = intent.getStringExtra("WHERE")
+
 
         val viewContainerMenuBottom: View = layoutInflater.inflate(
             R.layout.menu_bottom,
@@ -55,63 +64,70 @@ class AllTickets : AppCompatActivity() {
 
 
 
+        ticketViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
+        ticketViewModel.ticketLiveData.observe(this, Observer { ticket ->
+            ticket?.let { updateUI(it, textWhere.text.toString(), textFrom.text.toString()) }
+        })
 
+        ticketViewModel.errorLiveData.observe(this, Observer { error ->
+            showError(error)
+        })
+        ticketViewModel.fetchTickets()
+    }
+    private fun updateUI(ticket: Ticket,  textFrom: String, textWhere:String) {
+        val linerAllTickets: LinearLayout = findViewById(R.id.all_tickets)
+        linerAllTickets.removeAllViews()
 
+//        val filteredByDeparture = ticket.tickets.filter { tickets ->
+//            tickets.departure.town == textFrom && tickets.arrival.town == textWhere
+//        }
 
+        for (tickets in ticket.tickets) {
+            val viewTicketCard: View = layoutInflater.inflate(
+                R.layout.ticket_card,
+                null
+            )
+            val badge = viewTicketCard.findViewById<FrameLayout>(R.id.badge)
+            val badgeText = viewTicketCard.findViewById<TextView>(R.id.badge_text)
+            val price = viewTicketCard.findViewById<TextView>(R.id.price)
+            val departureTime = viewTicketCard.findViewById<TextView>(R.id.departure_time)
+            val departureAirport = viewTicketCard.findViewById<TextView>(R.id.departure_airport)
+            val arrivalTime = viewTicketCard.findViewById<TextView>(R.id.arrival_time)
+            val arrivalAirport = viewTicketCard.findViewById<TextView>(R.id.arrival_airport)
+            val transfer = viewTicketCard.findViewById<TextView>(R.id.transfer)
 
+            if (tickets.badge != null){
+                badge.visibility = View.VISIBLE
+                badgeText.text = tickets.badge
 
-
-
-
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val ticketApi = retrofit.create(TicketApi::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            val ticket = ticketApi.getTicket()
-            runOnUiThread{
-                val linerAllTickets: LinearLayout = findViewById(R.id.all_tickets)
-                linerAllTickets.removeAllViews()
-                for (tickets in ticket.tickets) {
-                    val viewTicketCard: View = layoutInflater.inflate(
-                        R.layout.ticket_card,
-                        null
-                    )
-                    val badge = viewTicketCard.findViewById<FrameLayout>(R.id.badge)
-                    val badgeText = viewTicketCard.findViewById<TextView>(R.id.badge_text)
-                    val price = viewTicketCard.findViewById<TextView>(R.id.price)
-                    val departureTime = viewTicketCard.findViewById<TextView>(R.id.departure_time)
-                    val departureAirport = viewTicketCard.findViewById<TextView>(R.id.departure_airport)
-                    val arrivalTime = viewTicketCard.findViewById<TextView>(R.id.arrival_time)
-                    val arrivalAirport = viewTicketCard.findViewById<TextView>(R.id.arrival_airport)
-                    val transfer = viewTicketCard.findViewById<TextView>(R.id.transfer)
-
-                    if (tickets.badge != null){
-                        badge.visibility = View.VISIBLE
-                        badgeText.text = tickets.badge
-
-                    }else{
-                        badge.visibility = View.GONE
-                    }
-
-                    price.text = "${tickets.price.value} ₽"
-                    departureTime.text = tickets.departure.date.substring(11, 16)
-                    departureAirport.text = tickets.departure.airport
-                    arrivalTime.text = tickets.arrival.date.substring(11, 16)
-                    arrivalAirport.text = tickets.arrival.airport
-
-                    if (!tickets.hasTransfer){
-                        transfer.text = getString(R.string.has_transfer_false)
-                    }else{
-                        transfer.text = getString(R.string.has_transfer_true)
-                    }
-
-
-                    linerAllTickets.addView(viewTicketCard)
-                }
+            }else{
+                badge.visibility = View.GONE
             }
+
+            price.text = "${tickets.price.value} ₽"
+            departureTime.text = tickets.departure.date.substring(11, 16)
+            departureAirport.text = tickets.departure.airport
+            arrivalTime.text = tickets.arrival.date.substring(11, 16)
+            arrivalAirport.text = tickets.arrival.airport
+
+            if (!tickets.hasTransfer){
+                transfer.text = getString(R.string.has_transfer_false)
+            }else{
+                transfer.text = getString(R.string.has_transfer_true)
+            }
+
+
+            linerAllTickets.addView(viewTicketCard)
         }
+    }
+
+    private fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@AllTickets, SearchResults::class.java))
+        finish()
     }
 }

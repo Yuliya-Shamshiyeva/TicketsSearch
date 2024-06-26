@@ -6,12 +6,21 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class Follow : AppCompatActivity() {
+class Weekend : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_follow)
+        setContentView(R.layout.activity_empty)
+
+        val text = findViewById<TextView>(R.id.text)
+        text.text = "Выходные"
+        val buttonBack = findViewById<ImageView>(R.id.button_back)
+        buttonBack.setOnClickListener{
+            startActivity(Intent(this@Weekend, MainActivity::class.java))
+            finish()
+        }
 
         val viewContainerMenuBottom: View = layoutInflater.inflate(
             R.layout.menu_bottom,
@@ -20,34 +29,34 @@ class Follow : AppCompatActivity() {
         val linerContainerMenuBottom: FrameLayout = findViewById(R.id.container_menu_bottom)
         linerContainerMenuBottom.addView(viewContainerMenuBottom)
 
-        val buttonMainActivity = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_avia_tickets)
+        val buttonFollow = linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_follow)
         val buttonBrieflySpeaking =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_briefly_speaking)
         val buttonHotels =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_hotels)
         val buttonProfile =linerContainerMenuBottom.findViewById<LinearLayout>(R.id.button_profile)
 
-        val iconFollow = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_follow)
-        iconFollow.setImageResource(R.drawable.icon_bell_blue)
+        val iconMainActivity = linerContainerMenuBottom.findViewById<ImageView>(R.id.img_avia_tickets)
+        iconMainActivity.setImageResource(R.drawable.icon_airplane2_blue)
 
-        buttonMainActivity.setOnClickListener{
-            startActivity(Intent(this@Follow, MainActivity::class.java))
+        buttonFollow.setOnClickListener{
+            startActivity(Intent(this@Weekend, Follow::class.java))
             finish()
         }
         buttonBrieflySpeaking.setOnClickListener{
-            startActivity(Intent(this@Follow, BrieflySpeaking::class.java))
+            startActivity(Intent(this@Weekend, BrieflySpeaking::class.java))
             finish()
         }
         buttonHotels.setOnClickListener{
-            startActivity(Intent(this@Follow, Hotels::class.java))
+            startActivity(Intent(this@Weekend, Hotels::class.java))
             finish()
         }
         buttonProfile.setOnClickListener{
-            startActivity(Intent(this@Follow, Profile::class.java))
+            startActivity(Intent(this@Weekend, Profile::class.java))
             finish()
         }
     }
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this@Follow, MainActivity::class.java))
+        startActivity(Intent(this@Weekend, MainActivity::class.java))
         finish()
     }
 }

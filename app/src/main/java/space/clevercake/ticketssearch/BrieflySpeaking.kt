@@ -45,4 +45,9 @@ class BrieflySpeaking : AppCompatActivity() {
             finish()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@BrieflySpeaking, MainActivity::class.java))
+        finish()
+    }
 }

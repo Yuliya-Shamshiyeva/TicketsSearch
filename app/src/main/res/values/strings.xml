@@ -34,4 +34,8 @@
     <string name="filter2">24 фев, сб</string>
     <string name="filter3">1 эконом</string>
     <string name="filter4">фильтр</string>
+
+    <string name="backsms">Нажмите еще раз, чтобы выйти</string>
+
+
 </resources>

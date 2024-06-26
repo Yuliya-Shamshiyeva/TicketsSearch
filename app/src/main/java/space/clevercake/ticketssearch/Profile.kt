@@ -45,4 +45,9 @@ class Profile : AppCompatActivity() {
             finish()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@Profile, MainActivity::class.java))
+        finish()
+    }
 }
